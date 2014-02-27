@@ -26,4 +26,5 @@ Reproducible Research means that results can be easily replicated.  This means
 Additional Information
 ---------------------------------------------------------
 Some additional information on R, R-Studio and Reproducible Research 
-* [LSE commentary on Reinheart and Rogoff](http://blogs.lse.ac.uk/impactofsocialsciences/2013/10/23/open-data-in-economics-the-basis-of-reproducible-research/)
+* [LSE commentary on Reinhart and Rogoff](http://blogs.lse.ac.uk/impactofsocialsciences/2013/10/23/open-data-in-economics-the-basis-of-reproducible-research/)
+* [Trends in use of particular analytical software](http://r4stats.com/2014/02/25/job-trends-improved/)
