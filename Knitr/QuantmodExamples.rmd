@@ -1,0 +1,39 @@
+Quantmod examples
+========================================================
+```{r, message=FALSE, warning=FALSE,cache=TRUE}
+require(quantmod)
+getSymbols("BAC")
+plot(BAC)
+head(BAC)
+tail(BAC)
+head(Ad(BAC))
+?quantmod
+?OHLC
+```
+There are a number of built in plotting functions. 
+```{r, fig.hight=4}
+barChart(BAC)
+addTA(EMA(Cl(BAC)),on=1,col=6)
+```
+The getSymbols function can draw data from a number of different sources. 
+```{r, warning=FALSE, message=FALSE, cache=TRUE}
+getSymbols("YHOO",src="google") # from google finance
+plot(YHOO)
+getSymbols("GOOG",src="yahoo") # from yahoo finance
+plot(GOOG)
+getSymbols('DEXJPUS',src="FRED") # FX rates from FRED
+plot(DEXJPUS)
+barChart(YHOO)
+candleChart(GOOG,multi.col=TRUE,theme='white')
+require(TTR)
+chartSeries(YHOO)
+addMACD()
+addBBands()
+```
+Once of the sources is the Fred database.  Here we get the data and chart it in different ways. 
+```{r}
+getSymbols('CPIAUCNS',src='FRED')
+plot(CPIAUCNS)
+plot(diff(log(CPIAUCNS)))
+plot(diff(log(CPIAUCNS), lag=12), main="CPI Inflation")
+```

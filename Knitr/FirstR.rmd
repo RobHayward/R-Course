@@ -1,0 +1,76 @@
+First R
+========================================================
+
+All the regular mathematical operations can be carried out. 
+```{r, eval=FALSE}
+#First R session
+4+5
+4*5
+4/5
+4^5
+sqrt(5)
+log(5)
+
+test<-2*3
+test
+
+test=2/3
+test
+```
+R Objects
+----------------------------------------------------------
+R uses objects. The main objects are:
+* numeric
+* character
+* logical 
+
+Character
+-----------------------------------------------------
+For an example of character
+```{r}
+a <- "My name"
+a
+```
+
+Vectors and matrices
+-----------------------------------------------------
+Strings or numerics can be concatonated or combined to form a vector or matrix
+```{r}  
+mynumbers <- c(3,5,6,7,9)
+mynumbers
+mynumbers <- c(1:10)
+mynumbers
+```
+To create a sequence, use the command sequence
+```{r}
+a <- seq(0.5,2.5, length=100)
+a
+b <- seq(1,10,1)
+b
+mynumbers <- 1:12
+m <-matrix(mynumbers, nrow=4)
+m
+```
+The plot function will allow you to create graphs with the data that you have. 
+```{r, fig.height=4}
+x<-seq(-pi,pi,length=10)
+y<-sin(x)
+plot(x,y)
+lines(x,y)
+```
+If you change the length of the x variable to 100 you will get a smoother line. 
+```{r, fig.height=4}
+x<-seq(-pi,pi,length=100)
+y<-sin(x)
+plot(x,y)
+lines(x,y)
+```
+```{r, fig.height=4}
+z<-rnorm(100)
+hist(z, prob=TRUE)
+mu<-mean(z)
+sig<-sd(z)
+x<-seq(-4,4,length=500)
+y<-dnorm(x,mu,sig)
+lines(x,y, col='red')
+```
