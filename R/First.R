@@ -49,3 +49,4 @@ sig<-sd(z)
 x<-seq(-4,4,length=500)
 y<-dnorm(x,mu,sig)
 lines(x,y, col='red')
+
