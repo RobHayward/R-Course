@@ -27,7 +27,3 @@ Additional Information
 ---------------------------------------------------------
 Some additional information on R, R-Studio and Reproducible Research 
 * [LSE commentary on Reinhart and Rogoff](http://blogs.lse.ac.uk/impactofsocialsciences/2013/10/23/open-data-in-economics-the-basis-of-reproducible-research/)
-
-Links
----------------------------------------------------------------------
-[First R]{link}
