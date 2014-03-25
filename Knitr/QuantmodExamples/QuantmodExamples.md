@@ -174,24 +174,30 @@ getSymbols("CPIAUCNS", src = "FRED")
 ```
 
 ```
-## [1] "CPIAUCNS"
+## Error: could not find function "getSymbols"
 ```
 
 ```r
 plot(CPIAUCNS)
 ```
 
-![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-41.png) 
+```
+## Error: object 'CPIAUCNS' not found
+```
 
 ```r
 plot(diff(log(CPIAUCNS)))
 ```
 
-![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-42.png) 
+```
+## Error: object 'CPIAUCNS' not found
+```
 
 ```r
 plot(diff(log(CPIAUCNS), lag = 12), main = "CPI Inflation")
 ```
 
-![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-43.png) 
+```
+## Error: object 'CPIAUCNS' not found
+```
 
