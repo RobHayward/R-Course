@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=9" >
+
+<title>Writing data and useing Dataframes</title>
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 12px;
+   margin: 8px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 { 
+   font-size:2.2em; 
+}
+
+h2 { 
+   font-size:1.8em; 
+}
+
+h3 { 
+   font-size:1.4em; 
+}
+
+h4 { 
+   font-size:1.0em; 
+}
+
+h5 { 
+   font-size:0.9em; 
+}
+
+h6 { 
+   font-size:0.8em; 
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre {	
+   margin-top: 0;
+   max-width: 95%;
+   border: 1px solid #ccc;
+   white-space: pre-wrap;
+}
+
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code.r, code.cpp {
+   background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * { 
+      background: transparent !important; 
+      color: black !important; 
+      filter:none !important; 
+      -ms-filter: none !important; 
+   }
+
+   body { 
+      font-size:12pt; 
+      max-width:100%; 
+   }
+       
+   a, a:visited { 
+      text-decoration: underline; 
+   }
+
+   hr { 
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote { 
+      padding-right: 1em; 
+      page-break-inside: avoid; 
+   }
+
+   tr, img { 
+      page-break-inside: avoid; 
+   }
+
+   img { 
+      max-width: 100% !important; 
+   }
+
+   @page :left { 
+      margin: 15mm 20mm 15mm 10mm; 
+   }
+     
+   @page :right { 
+      margin: 15mm 10mm 15mm 20mm; 
+   }
+
+   p, h2, h3 { 
+      orphans: 3; widows: 3; 
+   }
+
+   h2, h3 { 
+      page-break-after: avoid; 
+   }
+}
+
+</style>
+
+<!-- Styles for R syntax highlighter -->
+<style type="text/css">
+   pre .operator,
+   pre .paren {
+     color: rgb(104, 118, 135)
+   }
+
+   pre .literal {
+     color: rgb(88, 72, 246)
+   }
+
+   pre .number {
+     color: rgb(0, 0, 205);
+   }
+
+   pre .comment {
+     color: rgb(76, 136, 107);
+   }
+
+   pre .keyword {
+     color: rgb(0, 0, 255);
+   }
+
+   pre .identifier {
+     color: rgb(0, 0, 0);
+   }
+
+   pre .string {
+     color: rgb(3, 106, 7);
+   }
+</style>
+
+<!-- R syntax highlighter -->
+<script type="text/javascript">
+var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+
+</head>
+
+<body>
+<h1>Writing data and useing Dataframes</h1>
+
+<h2>Writing data</h2>
+
+<p>One of the main things that you want to be able to do is to draw in data so that you can analyse and produce graphics.  The file BAC.csv should be saved to a specific location (ideally the working directory)</p>
+
+<p>The working directory is where R will look for inforamtion (data and code mainly).  You can change this using the command cd or the menu system</p>
+
+<p>The command to read files of data into R is &ldquo;read.table&rdquo;.  A particular version of this which is useful for excel files converted to &ldquo;comma separated variable&rdquo; (CAV) file is &ldquo;read.csv&rdquo;.  You can find out more about this from the usual place. </p>
+
+<pre><code class="r">da &lt;- read.csv(&quot;C://Users/Toshiba/Desktop/bac.csv&quot;)
+head(da)
+</code></pre>
+
+<pre><code>##         Date   BAC   SPY
+## 1 03/12/2012 11.58 139.6
+## 2 01/11/2012  9.82 138.4
+## 3 01/10/2012  9.28 137.6
+## 4 04/09/2012  8.79 140.1
+## 5 01/08/2012  7.95 136.7
+## 6 02/07/2012  7.30 133.3
+</code></pre>
+
+<p>As you are now using a larger file and we do not want to open the spreadsheet, it is possible to use the commands &ldquo;summary&rdquo; and &ldquo;str&rdquo; to take a look.</p>
+
+<pre><code class="r">summary(da)
+</code></pre>
+
+<pre><code>##          Date          BAC             SPY       
+##  01/02/2000:  1   Min.   : 3.87   Min.   : 65.5  
+##  01/02/2001:  1   1st Qu.:14.26   1st Qu.: 91.0  
+##  01/02/2002:  1   Median :23.16   Median :103.3  
+##  01/02/2005:  1   Mean   :24.44   Mean   :104.1  
+##  01/02/2006:  1   3rd Qu.:35.17   3rd Qu.:118.6  
+##  01/02/2007:  1   Max.   :46.45   Max.   :140.1  
+##  (Other)   :150
+</code></pre>
+
+<pre><code class="r">str(da)
+</code></pre>
+
+<pre><code>## &#39;data.frame&#39;:    156 obs. of  3 variables:
+##  $ Date: Factor w/ 156 levels &quot;01/02/2000&quot;,&quot;01/02/2001&quot;,..: 152 91 81 156 65 119 47 37 112 20 ...
+##  $ BAC : num  11.58 9.82 9.28 8.79 7.95 ...
+##  $ SPY : num  140 138 138 140 137 ...
+</code></pre>
+
+<p>The Date has been downloaded as a &ldquo;Factor&rdquo;.  This is just a categorial object.  In this case there are 156 categories (because there are 156 months of data).  Factors are useful if we have data like sex (two factors: male, female), investment profile (three factors:  high risk, medium risk, low risk) etc. It would be better in this case if R treated the dates as a date. </p>
+
+<pre><code class="r">da &lt;- read.csv(&quot;C://Users/Toshiba/Desktop/bac.csv&quot;, stringsAsFactors = FALSE)
+da$Date &lt;- as.Date(da$Date, format = &quot;%m/%d/%Y&quot;)
+str(da)
+</code></pre>
+
+<pre><code>## &#39;data.frame&#39;:    156 obs. of  3 variables:
+##  $ Date: Date, format: &quot;2012-03-12&quot; &quot;2012-01-11&quot; ...
+##  $ BAC : num  11.58 9.82 9.28 8.79 7.95 ...
+##  $ SPY : num  140 138 138 140 137 ...
+</code></pre>
+
+<h2>Dataframe</h2>
+
+<p>A dataframe is like a matrix.  However, unlike a matrix, a dataframe can have a variety of classes.  It can combine numeric data with charcter strings or dates.  There are two main ways to access indivicual parts of a data.frame: use the column name or identify the row or column</p>
+
+<pre><code class="r">head(da$BAC)
+</code></pre>
+
+<pre><code>## [1] 11.58  9.82  9.28  8.79  7.95  7.30
+</code></pre>
+
+<pre><code class="r">plot(da$SPY, main = &quot;S&amp;P 500 ETF&quot;, type = &quot;l&quot;)
+</code></pre>
+
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfgAAAH4CAMAAACR9g9NAAAAflBMVEX9/v0AAAAAADkAAGUAOTkAOWUAOY8AZo8AZrU5AAA5ADk5AGU5OY85j485j9plAABlADllAGVlOQBlOY9lZmVlj49ltf2POQCPOTmPOWWPZgCPtY+P2/21ZgC1ZmW1/rW1/v3ajzna24/a/tra/v39tWX924/9/rX9/tr9/v2o1unuAAAAKnRSTlP//////////////////////////////////////////////////////wAyqPBcAAAACXBIWXMAAAsSAAALEgHS3X78AAAReUlEQVR4nO2dCX/ivBGHXyVtmn13SzY9yLaFFtpwff8vWMtHsEE2OkbSSPN/frsxAUsz+MG6DOS3CxDJb7kTAHmAeKFAvFAgXigQLxSIFwrECwXihQLxQoF4oUC8UCBeKBAvFIgXCsQLBeKFAvFCgXihQLxQIF4oEC8UiBcKxAsF4oUC8UKpX/zpTamXz+bGXim17u/obzYcvzW3n3eX84dSr83vw/a649NG36f5U79dZ3oqlFQvvrP3qg2/XvZPm5HP9vGD6sRv+92G7QXiy+b47eXz9NaYPTQ699rZ6U03AFu1ah/fdy+A47fnnd5t2Or7uh2v1TStQfdADQgQ35+gzWn7d21vKr49mfuXxWX7tBm2+jGIL5nBbNuIt034pKnvfnneHfTrYKvWw3a0Y2u/F6+uHUHhVC++67Wfd/0L4N+73mffxWuhzUNriK8R3dwfGoF79ec33eNfW/COvVqhqa+NfTdUXzdy2zN2NfF50a8HfcZjcFcb7TxdaaONua1uuCfiu+a8e2hmOte2+xBfHNq8brrbV0Bz4q+nTf2wvjO/gAPxoCIgXigQLxSIFwrECwXihQLxQoF4oUC8UCBeKBAvFIgXCsQLBeKFAvFCgXihQLxQIF4oEC8UiBcKxAsF4oUC8UIJEa8AZyKKDygLYgPxQoF4oUC8UILFdx83VYaPC0I8Z0LFnz+6r5A53H6bAMTzJlT86X032dpXDbKCM14owX18//UA6OMLA6N6oUC8UGjEH78bvvwF4jkTPKrvvwHI0Mmbq8bLgQcEg7tG+eSMX77+A/E8IGjqT28v/7Vv6iGeByR9vP6+x4dVq/4nzLMg3age4lmRcDqnuh8QzwKIF0rKBRx1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" alt="plot of chunk unnamed-chunk-4"/> </p>
+
+<pre><code class="r">head(da[, 1])
+</code></pre>
+
+<pre><code>## [1] &quot;2012-03-12&quot; &quot;2012-01-11&quot; &quot;2012-01-10&quot; &quot;2012-04-09&quot; &quot;2012-01-08&quot;
+## [6] &quot;2012-02-07&quot;
+</code></pre>
+
+<pre><code class="r">da[4, ]
+</code></pre>
+
+<pre><code>##         Date  BAC   SPY
+## 4 2012-04-09 8.79 140.1
+</code></pre>
+
+<p>The function &ldquo;which&rdquo; will return an index.  Therefore, if you ask which row = &ldquo;2012-01-08&rdquo;, you will get [5,] and this can be used as the input. </p>
+
+<pre><code class="r">da[which(da$Date == &quot;2012-01-08&quot;), ]
+</code></pre>
+
+<pre><code>##         Date  BAC   SPY
+## 5 2012-01-08 7.95 136.7
+</code></pre>
+
+</body>
+
+</html>
+
