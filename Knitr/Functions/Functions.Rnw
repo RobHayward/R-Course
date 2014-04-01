@@ -1,0 +1,9 @@
+Writing functions
+--------------------------------
+The advantage of programming rather than using menus is that it allows you to create your own functions for things that you want to do.  This is carried out using the function function. 
+
+```{r} 
+a <- function(x) {
+  x^2
+}
+```
