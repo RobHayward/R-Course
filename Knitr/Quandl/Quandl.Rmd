@@ -1,0 +1,44 @@
+Using Quandl
+========================================================
+QUandl is an open source collector of data.  It is mostly economic data from a number of official and semi-official sources. 
+
+The site is [http://www.quandl.com/](http://www.quandl.com/)
+This is an unashamed reproduction of somethinng that appeared on the Quandl blog. 
+
+The 60:40 rule
+----------------------------
+This is from [http://blog.quandl.com/blog/using-r-to-model-the-classic-6040-investing-rule/](http://blog.quandl.com/blog/using-r-to-model-the-classic-6040-investing-rule/).  You will need to register to the site and get an API key to make the work most effectively. 
+
+There is also extensive documentation [http://www.quandl.com/help/api](http://www.quandl.com/help/api)
+
+
+```{r, warning=FALSE, message=FALSE, cache=TRUE}
+require(Quandl) 
+# Quandl
+Quandl.auth('mUCjthkJFQDsYVrFh4Gh')
+AAA <- Quandl("ML/AAATRI",start_date="1990-01-01",end_date="2012-12-31",
+collapse='monthly')
+TR <- Quandl("SANDP/MONRETS",start_date="1990-01-01",end_date="2012-12-31" )
+class(AAA)
+head(AAA)
+```
+This is the data.frame that has been downloaded from Quandl.  
+```{r, fig.width=10}
+require(PerformanceAnalytics)
+bond.r <- (diff(log(AAA))) 
+stock.r <- (diff(log(TR)))
+
+for (i in 1:NROW(TR)){
+stock[i] <- cumsum(prod((1+TR[1:i,11])))
+}
+# Graphical Parameters:
+stockframe = data.frame(value=stock,Date=Time)
+bondframe = data.frame(value=bond,Date=Time)
+line.plot <- ggplot() +
+geom_line(data=stockframe, aes(x=Date, y=value, colour="Stocks")) +
+geom_line(data=bondframe, aes(x=Date, y=value, colour="Bonds")) +
+scale_colour_manual("", breaks = c("Stocks", "Bonds"), values = c("#29779f","#d8593b")) +
+theme(panel.background = element_rect(fill='#FFFFFF'), panel.grid.major.x = element_blank(), panel.grid.major.y = element_line(colour='#3a4047', size=0.1), panel.grid.minor = element_line(colour='#3a4047', size=0.1)) +
+xlab("Date") + ylab("Returns") + ggtitle("Stocks and Bonds")
+line.plot
+```
