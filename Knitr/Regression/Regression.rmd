@@ -1,0 +1,41 @@
+Regression
+========================================================
+OLS
+----------------------------------------------------------
+Load the BAc data into R.  Use the lm function to create a linar model. Use \?lm or F1 in R-studio to find out more about the function. 
+```{r}
+da <- read.csv("../../Data/BAC.csv")
+head(da)
+BACr <- diff(log(da$BAC))
+SPYr <- diff(log(da$SPY))
+eq1 <- lm(BACr ~ SPYr)
+summary(eq1)
+```
+Note that summary will provide a summary of the object and will provide information that is appropriate to the object that is being summarised.  
+
+The LM Object
+----------------------------
+Note that an LM object is a list.  The following components can be useful
+* Coefficients
+* residuals
+* fitted.values
+df.residual
+
+The full list can be uncovered by asking for the names
+
+```{r}
+names(eq1)
+plot(eq1$residuals, type = 'l', main = "Residuals")
+```
+Or look at a histogram of the residuals
+```{r}
+x <- mean(eq1$residuals)
+y <- sd(eq1$residuals)
+norm.sim <- rnorm(1000, x, y)
+hist(eq1$residuals, prob = TRUE, main = "Hist of Residuals")
+lines(density(norm.sim), col = 'red')
+
+```
+
+
+
