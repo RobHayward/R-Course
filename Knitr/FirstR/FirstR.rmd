@@ -23,6 +23,8 @@ R uses objects. The main objects are:
 * numeric
 * character
 * logical 
+* Vector
+* Data frame
 
 Character
 -----------------------------------------------------
