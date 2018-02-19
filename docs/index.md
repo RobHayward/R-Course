@@ -1,6 +1,7 @@
 Introduction
 ========================================================
-R is an open-source statistical programming language.  It is available from the following website: [R-Cran](http://www.r-project.org/). You should install R on you labtop.  For us it is probably best to use the [following link](http://www.stats.bris.ac.uk/R/).  You can also install [R-Studio](https://www.rstudio.com/) which is an Integrated Development Environment (IDE) for R. 
+R is an open-source statistical programming language.  It is available from the following website: [R-Cran](http://www.r-project.org/). You should install R on you laptop.  For us it is probably best to use the [following link](http://www.stats.bris.ac.uk/R/).  You can also install [R-Studio](https://www.rstudio.com/) which is an Integrated Development Environment (IDE) for R. 
+
 Competitors
 ----------------------------------------------------------
 R is one of the main programmable statistical languages.  Others include:
