@@ -31,4 +31,4 @@ Some additional information on R, R-Studio and Reproducible Research
 
 Sessions
 ---------------
-1. [First Session](../Knitr/FirstR/FirstR.Rmd)
+1. [First Session](http://rpubs.com/RobHayward/362235)
