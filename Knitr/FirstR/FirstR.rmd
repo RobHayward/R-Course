@@ -1,42 +1,81 @@
+---
+output: 
+  html_document: 
+    theme: united
+---
 First R
 ========================================================
 
+###Introduction
 All the regular mathematical operations can be carried out. 
 ```{r, eval=FALSE}
-#First R session
-4+5
-4*5
-4/5
+
+4 + 5
+4 * 5
+4 / 5
 4^5
+
 sqrt(5)
 log(5)
 
-test<-2*3
+test <- 2*3
 test
 
-test=2/3
+test = 2/3
 test
 ```
-R Objects
+
+**Practice**
+
+* Calculate the average of 2, 5, 6, 8, 9, 15, 1, 3
+* Calculate 10405 10222 as a percentage change
+
+
+Objects
 ----------------------------------------------------------
 R uses objects. The main objects are:
+
 * numeric
 * character
 * logical 
-* Vector
-* Data frame
+* vector
+* data frame
 
-Character
------------------------------------------------------
+
+When things go wrong, it is often the case that you are to something impossible with that object.  For example, adding up characters. 
+
+
+###Character
 For an example of character
 ```{r}
 a <- "My name"
 a
 ```
 
+**Practice**
+
+* Assign you first and last name to the objects ``a`` and ``b``
+* Add ``a`` to ``b``
+
+###Logical (boolean,  true or false)
+```{r}
+1 == 1
+
+1 == 2 
+
+1 & 2 == 1
+
+1 | 2 == 1
+```
+
+**Practice**
+
+* Test ``Myname`` is equal to "Rob Hayward"
+
+
 Vectors and matrices
 -----------------------------------------------------
-Strings or numerics can be concatonated or combined to form a vector or matrix
+Strings or numerics can be concatenated or combined to form a vector or matrix
 ```{r}  
 mynumbers <- c(3,5,6,7,9)
 mynumbers
@@ -53,6 +92,35 @@ mynumbers <- 1:12
 m <-matrix(mynumbers, nrow=4)
 m
 ```
+
+Individual components of a vector, matrix or data.frame can be identifies by using square brackets and a pair of numbers with the first equal to the row and the second equal to column.  You only need the first number for a vector. 
+
+```{r}
+A <- c(1, 2, 6, 8, 10)
+B <- c(55, 56, 60, 20, 18)
+C <- data.frame(A, B)
+C[3, 2]
+C$A
+```
+
+As you can see, a ``$`` can also be used to identify a column by `name'. 
+
+**Practice**
+
+* Assign a two-by-two matrix with the numbers from 1 to 4 to the letter ``c``
+* Make ``Mynumber`` equal to the bottom left corner
+* Make ``Mysecondnumber`` equal to the top right corner
+* Assign a two-by-two matrix with the numbers from 5 to 8 to the letter ``d``
+* Multiply ``c`` and ``d``
+
+
+Matrices and vectors can only contain one object. Try the previous exercise with the ``d`` matrix changes to the sequence ``a, b, c, d``. 
+
+Data-frames can group together vectors or various class.  These will probably be the most useful for us as we want time series with dates and integers. 
+
+
+Plotting
+--------------------------------------------------------
 The plot function will allow you to create graphs with the data that you have. 
 ```{r, fig.height=4}
 x<-seq(-pi,pi,length=10)
@@ -76,3 +144,27 @@ x<-seq(-4,4,length=500)
 y<-dnorm(x,mu,sig)
 lines(x,y, col='red')
 ```
+
+Input data
+---------------------------------------------------------
+By far the easiest way to input data is to read the data from a csv file.  There are packages for reading from excel and from other databases that we will look at later. 
+
+```{r}
+da <- read.csv('../../Data/bac.csv')
+head(da)
+str(da)
+```
+It is important to make sure that the variables in the data.frame of of the correct class.  In this case, the ``Date`` series (first column) is a ``factor``.  We need to change it to date. 
+
+```{r}
+da$Date <- as.Date(da$Date, format = "%d/%m/%Y")
+str(da)
+```
+
+**Practice**
+
+* Go to Yahoo finance and download data for Ford (F) from January 2000 to December 2017
+* Save the csv file to the desktop and import into R
+* Plot the Closing price
+* Beautify the plot.
+
