@@ -1,10 +1,15 @@
+---
+output: 
+  html_document: 
+    theme: united
+---
 Regression
 ========================================================
 OLS
 ----------------------------------------------------------
 Load the BAc data into R.  Use the lm function to create a linar model. Use \?lm or F1 in R-studio to find out more about the function. 
 ```{r}
-da <- read.csv("../../Data/BAC.csv")
+da <- read.csv("../../Data/bac.csv")
 head(da)
 BACr <- diff(log(da$BAC))
 SPYr <- diff(log(da$SPY))

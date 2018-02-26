@@ -2,3 +2,6 @@
 .Rhistory
 .RData
 .todo
+*Examples_cache/
+*Examples_files/
+*rsconnect/
