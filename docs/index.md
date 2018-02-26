@@ -5,7 +5,7 @@ R is an open-source statistical programming language.  It is available from the 
 Competitors
 ----------------------------------------------------------
 R is one of the main programmable statistical languages.  Others include:
-* Stata:  Use in academic econometrics. This is not open source.
+* Stata:  Used in academic econometrics. This is not open source.
 * Matlab:  Used extensively in academic finance.  It is not open-source.  There is an open-source clone called *Octave*.  It can be downloaded [here.](https://www.gnu.org/software/octave/)
 * Python: Computer Langue for statistical programming.  
 * Julia:  New langue that is faster than R
@@ -28,7 +28,7 @@ Additional Information
 ---------------------------------------------------------
 Some additional information on R, R-Studio and Reproducible Research 
 * [LSE commentary on Reinhart and Rogoff](http://blogs.lse.ac.uk/impactofsocialsciences/2013/10/23/open-data-in-economics-the-basis-of-reproducible-research/)
-* [Quick R](https://wwwstatmethods.net)
+* [Quick R](https://www.statmethods.net)
 * [R Course on DataCamp](https://www.datacamp.com/courses/free-introduction-to-r)
 
 Sessions
