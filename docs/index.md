@@ -13,16 +13,18 @@ R is one of the main programmable statistical languages.  Others include:
 
 Advantages of using R
 ------------------------------------------------------------
-The main advantages of using an open-source statistical programming langue like R are:
-* It can be used by anyone for no cost.  Your model will not depend on the next institution having the same software licence
+The main advantages of using an open-source statistical programming language like R are:
+* It can be used by anyone for no cost.  
+* Your model will not depend on the next institution having the same software licence (do firms use Eviews?)
 * Programming langue will encourage *reproducible research*
 
 Reproducible Research
 --------------------------------------------------------------
-Reproducible Research means that results can be easily replicated.  This means
+Reproducible Research is good practice and it means that results can be easily replicated.  This means
 * Mistakes are less likely to happen thaj would be the case with *copy and paste*
 * Mistakes can be more swiftly identified
 * Changes to data or research methods are easier to make
+* This is increasingly important for compliance in financial institutions
 
 Additional Information
 ---------------------------------------------------------
