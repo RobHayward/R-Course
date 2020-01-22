@@ -7,24 +7,26 @@ Competitors
 R is one of the main programmable statistical languages.  Others include:
 * Stata:  Used in academic econometrics. This is not open source.
 * Matlab:  Used extensively in academic finance.  It is not open-source.  There is an open-source clone called *Octave*.  It can be downloaded [here.](https://www.gnu.org/software/octave/)
-* Python: Computer Langue for statistical programming.  
-* Julia:  New langue that is faster than R
+* Python: Computer Langue for statistical programming.  This is a good alternative to R. 
 * C++:  Programming langue.  Underneath R is C++ in some cases. 
 
 Advantages of using R
 ------------------------------------------------------------
 The main advantages of using an open-source statistical programming language like R are:
 * It can be used by anyone for no cost.  
+* You can read and adjust functions that have been created by other people
+* There is a large community of people to help you
 * Your model will not depend on the next institution having the same software licence (do firms use Eviews?)
-* Programming langue will encourage *reproducible research*
+* Programming language will encourage *reproducible research*
 
 Reproducible Research
 --------------------------------------------------------------
 Reproducible Research is good practice and it means that results can be easily replicated.  This means
-* Mistakes are less likely to happen thaj would be the case with *copy and paste*
+* Mistakes are less likely to happen than would be the case with *copy and paste*
+* Someone else can easily see what you have done (that *someone* could be your future self trying to re-solve a similar problem)
 * Mistakes can be more swiftly identified
 * Changes to data or research methods are easier to make
-* This is increasingly important for compliance in financial institutions
+* Replication and clarity are increasingly important for compliance in financial institutions
 
 Additional Information
 ---------------------------------------------------------
