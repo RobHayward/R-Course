@@ -8,7 +8,7 @@ R is one of the main programmable statistical languages.  Others include:
 * Stata:  Used in academic econometrics. This is not open source.
 * Matlab:  Used extensively in academic finance.  It is not open-source.  There is an open-source clone called *Octave*.  It can be downloaded [here.](https://www.gnu.org/software/octave/)
 * Python: Computer Langue for statistical programming.  This is a good alternative to R. 
-* C++:  Programming langue.  Underneath R is C++ in some cases. 
+* C++:  Programming language.  Underneath R is C++ in some cases. 
 
 Advantages of using R
 ------------------------------------------------------------
