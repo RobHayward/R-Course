@@ -40,3 +40,4 @@ Sessions
 ---------------
 1. [First Session](http://rpubs.com/RobHayward/362235)
 2. [Using Quantmod](https://rpubs.com/RobHayward/363333) 
+3. [Second R](https://rpubs.com/RobHayward/508553)
