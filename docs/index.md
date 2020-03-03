@@ -40,4 +40,4 @@ Sessions
 ---------------
 1. [First Session](http://rpubs.com/RobHayward/362235)
 2. [Using Quantmod](https://rpubs.com/RobHayward/363333) 
-3. [CAPM, regression and descriptive statistics](https://rpubs.com/RobHayward/508553)
+3. [CAPM, regression and descriptive statistics](https://rpubs.com/RobHayward/580553)
