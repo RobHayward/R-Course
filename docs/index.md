@@ -15,14 +15,17 @@ Advantages of using R
 ------------------------------------------------------------
 The main advantages of using an open-source statistical programming language like R are:
 * It can be used by anyone for no cost.  Your model will not depend on the next institution having the same software licence
+* You can read and adjust functions that have been created by other people
+* There is a large community of people to help you
+* Your model will not depend on the next institution having the same software licence (do firms use Eviews?)
 * Programming language will encourage *reproducible research*
 
 Reproducible Research
 --------------------------------------------------------------
-Reproducible Research means that results can be easily replicated.  This means
-* Mistakes are less likely to happen that would be the case with *copy and paste*
+Reproducible Research is good practice and it means that results can be easily replicated.  This means
 * Mistakes can be more swiftly identified
 * Changes to data or research methods are easier to make
+* Replication and clarity are increasingly important for compliance in financial institutions
 
 Additional Information
 ---------------------------------------------------------
@@ -36,3 +39,4 @@ Sessions
 ---------------
 1. [First Session](http://rpubs.com/RobHayward/362235)
 2. [Using Quantmod](https://rpubs.com/RobHayward/363333) 
+3. [CAPM, regression and descriptive statistics](https://rpubs.com/RobHayward/580553)

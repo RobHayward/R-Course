@@ -28,12 +28,12 @@ test
 ### **Practice**
 
 * Calculate the average of 2, 5, 6, 8, 9, 15, 1, 3
-* Calculate the difference between 10405 10222 as a percentage change
+* Calculate the difference between 225 and 200 as a percentage change
 
 
 # Objects
 ----------------------------------------------------------
-R uses objects. The main objects are:
+R uses objects. Among the main objects are:
 
 * numeric
 * character
