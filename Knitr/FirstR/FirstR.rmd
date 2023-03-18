@@ -1,13 +1,13 @@
 ---
+title: "First R"
 output: 
   html_document: 
     theme: united
 ---
-First R
-========================================================
+# Introduction
 
-###Introduction
-All the regular mathematical operations can be carried out. 
+All the regular mathematical operations can be carried out.  The usual signals and hierarchies are used. 
+
 ```{r, eval=FALSE}
 
 4 + 5
@@ -25,13 +25,13 @@ test = 2/3
 test
 ```
 
-**Practice**
+### **Practice**
 
 * Calculate the average of 2, 5, 6, 8, 9, 15, 1, 3
-* Calculate 10405 10222 as a percentage change
+* Calculate the difference between 10405 10222 as a percentage change
 
 
-Objects
+# Objects
 ----------------------------------------------------------
 R uses objects. The main objects are:
 
@@ -45,19 +45,19 @@ R uses objects. The main objects are:
 When things go wrong, it is often the case that you are to something impossible with that object.  For example, adding up characters. 
 
 
-###Character
+# Character
 For an example of character
 ```{r}
 a <- "My name"
 a
 ```
 
-**Practice**
+### **Practice**
 
 * Assign you first and last name to the objects ``a`` and ``b``
 * Add ``a`` to ``b``
 
-###Logical (boolean,  true or false)
+# Logical (boolean,  true or false)
 ```{r}
 1 == 1
 
@@ -66,14 +66,15 @@ a
 1 & 2 == 1
 
 1 | 2 == 1
+
+1 > 2
+
+1 < 2
 ```
 
-**Practice**
-
-* Test ``Myname`` is equal to "Rob Hayward"
 
 
-Vectors and matrices
+# Vectors and matrices
 -----------------------------------------------------
 Strings or numerics can be concatenated or combined to form a vector or matrix
 ```{r}  
@@ -93,77 +94,106 @@ m <-matrix(mynumbers, nrow=4)
 m
 ```
 
+Extract elements from the matrix by using ``[x, y]`` where x is the row and y is the column. Therefore ``m[1, 1]`` would be the top left hand corner.  ``m[ , 1]`` will select all the first column, ``m[2, ]`` will select all the second row. 
+
+# Data frames
+
+Matrices can only contain one type of object. Data-frames can group together vectors or various class.  These will be the most useful for us as we want time series with dates and integers. 
+
 Individual components of a vector, matrix or data.frame can be identifies by using square brackets and a pair of numbers with the first equal to the row and the second equal to column.  You only need the first number for a vector. 
 
 ```{r}
-A <- c(1, 2, 6, 8, 10)
-B <- c(55, 56, 60, 20, 18)
-C <- data.frame(A, B)
-C[3, 2]
-C$A
+Students <- c('Rob', 'James', 'Sam', 'Jane')
+Marks <- c(20, 45, 65, 52)
+myclass <- data.frame(Students, Marks)
+myclass[, 1]
+myclass[, 2]
+mean(myclass[, 2])
 ```
 
-As you can see, a ``$`` can also be used to identify a column by `name'. 
+It is also possible to subset columns by their name in a dataframe. Use the ``$`` after the dataframe name. 
 
-**Practice**
-
-* Assign a two-by-two matrix with the numbers from 1 to 4 to the letter ``c``
-* Make ``Mynumber`` equal to the bottom left corner
-* Make ``Mysecondnumber`` equal to the top right corner
-* Assign a two-by-two matrix with the numbers from 5 to 8 to the letter ``d``
-* Multiply ``c`` and ``d``
-
-
-Matrices and vectors can only contain one object. Try the previous exercise with the ``d`` matrix changes to the sequence ``a, b, c, d``. 
-
-Data-frames can group together vectors or various class.  These will probably be the most useful for us as we want time series with dates and integers. 
+```{r}
+myclass$Students
+myclass$Marks
+myclass$Students == 'Rob'
+myclass[myclass$Students == 'Rob', ]
+myclass$Marks > 50
+myclass$Marks > 50
+myclass[myclass$Marks > 50, ]
+```
 
 
-Plotting
+### **Practice**
+
+* Extract the marks for Jane
+* Extract those marks that are below 50
+
+
+
+
+# Plotting
 --------------------------------------------------------
-The plot function will allow you to create graphs with the data that you have. 
+The plot function will allow you to create graphs with the data that you have.  Plotting is the best way to understand the data that you have. It will also identify if there are any errors.
+
+The ``plot`` function will plot the data.  You need two series that match.  If you get an error it is frequently the case that they are of different length.  You can you add more lines by using the ``lines`` function.   Here we create two series and plot. 
+
+
 ```{r, fig.height=4}
-x<-seq(-pi,pi,length=10)
-y<-sin(x)
-plot(x,y)
-lines(x,y)
+x<-seq(1: 10)
+y1<-x ^ 2
+y2 <- 2 * x ^ 2
+plot(x,y2)
+lines(y1)
 ```
-If you change the length of the x variable to 100 you will get a smoother line. 
+
+There are a number of parameters that can be used to customise the plot.  
+
+* ``col``: colour, which will determine the colour of the lines
+* ``lty``: line type, which will determine the type of plot, dashed or straight
+* ``lwd``: line weight will determine the weight of the line
+* ``legend``:  will create a legend (more below)
+* ``main``: will provide a main heading
+* ``xlab``:  will provide a label for the x axis
+* ``ylab``: will provide a label for the y axis.
+
+
+### **Practice**
+Using the same x, y1 and y2 variables, see if you can create a plot with a heading and alternative labels for the x and y axis.  If you are adventurous you can change the colour, weight and type of lines. 
+
+It is also possible to create histograms.  Here we use the ``rnorm`` function to create 100 normal random variables and then to calculate the mean and standard deviation of these series and use these as the basis for constructing a normal distribution using these values for the mean and standard deviation. 
+
+
+
 ```{r, fig.height=4}
-x<-seq(-pi,pi,length=100)
-y<-sin(x)
-plot(x,y)
-lines(x,y)
-```
-```{r, fig.height=4}
-z<-rnorm(100)
+z <- rnorm(100)
 hist(z, prob=TRUE)
-mu<-mean(z)
-sig<-sd(z)
-x<-seq(-4,4,length=500)
-y<-dnorm(x,mu,sig)
+mu <- mean(z)
+sig <-sd(z)
+x <- seq(-4,4,length=500)
+y <- dnorm(x,mu,sig)
 lines(x,y, col='red')
 ```
 
-Input data
+# Input data
 ---------------------------------------------------------
-By far the easiest way to input data is to read the data from a csv file.  There are packages for reading from excel and from other databases that we will look at later. 
+By far the easiest way to input data is to read the data from a csv file.  There are packages for reading from excel and from other databases that we will look at later.  One you have the data you can check that it has been imported correctly by using the functions ``head`` and ``str``.    The second of these will tell you about the structure of the data. 
 
 ```{r}
 da <- read.csv('../../Data/bac.csv')
 head(da)
 str(da)
 ```
-It is important to make sure that the variables in the data.frame of of the correct class.  In this case, the ``Date`` series (first column) is a ``factor``.  We need to change it to date. 
+It is important to make sure that the variables in the data.frame of of the correct class.  In this case, the ``Date`` series (first column) is a ``factor``.  We need to change it to date. Note that the function here is ``as.Date`` and that we need to specify the way that the date is presented.  
 
 ```{r}
 da$Date <- as.Date(da$Date, format = "%d/%m/%Y")
 str(da)
 ```
 
-**Practice**
+### **Practice**
 
-* Go to Yahoo finance and download data for Ford (F) from January 2000 to December 2017
+* Go to Yahoo finance and download data for Ford (F) from January 2000 to December 2020
 * Save the csv file to the desktop and import into R
 * Plot the Closing price
 * Beautify the plot.

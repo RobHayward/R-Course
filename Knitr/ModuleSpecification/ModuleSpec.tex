@@ -1,0 +1,115 @@
+\documentclass[12pt, a4paper, oneside]{article}\usepackage[]{graphicx}\usepackage[]{color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt} % Paper size, default font size and one-sided paper
+%\graphicspath{{./Figures/}} % Specifies the directory where pictures are stored
+%\usepackage[dcucite]{harvard}
+\usepackage{amsmath}
+\usepackage{setspace}
+\usepackage[english]{babel}
+\usepackage{pdflscape}
+\usepackage{rotating}
+\usepackage[flushleft]{threeparttable}
+\usepackage{multirow}
+\usepackage[comma, sort&compress]{natbib}% Use the natbib reference package - read up on this to edit the reference style; if you want text (e.g. Smith et al., 2012) for the in-text references (instead of numbers), remove 'numbers' 
+\usepackage{graphicx}
+%\bibliographystyle{plainnat}
+\bibliographystyle{agsm}
+\usepackage[colorlinks = true, citecolor = blue, linkcolor = blue]{hyperref}
+%\hypersetup{urlcolor=blue, colorlinks=true} % Colors hyperlinks in blue - change to black if annoying
+%\renewcommand[\harvardurl]{URL: \url}
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+\title{Stats and Probability Information}
+\author{Rob Hayward}
+\date{\today}
+\maketitle
+
+\section{Introduction}
+There are some notes \href{http://www.learninginstitute.qmul.ac.uk/wp-content/uploads/2011/05/Aims-and-Outcomes-Guide.pdf}{Learning Otcomes}.
+
+In general we are looking at aims, objectives and outcomes. 
+\begin{itemize}
+\item aims: the overll aims of the pogramme.  What is the purpose of progrmme or module? What is it trying to achieve? 
+\item Objectives: the steps that are taken towards the aims. 
+\item  Trends towards outcomes-based rather than objective based. Part of the move towards a more student-focused model rather than a teacher-focused.
+\end{itemize}
+
+Learning outcomes are the skills and knowledge that it is intended that students will be able to demonstrate by the time the asssessment process has been completed. 
+
+Should outcomes relate to the typical student? 
+
+All learning outcomes should be assessble though they may not be assessed.  Outcomes should be sufficiently broad to allow flexibile coverage for those with different skills and bckgroun. The outcome should make clear how the student can articule or show that they have achieved the outcomme. The outcome should explain something about the process (i.e. designe and carry out a reserch project, rather than write a dissertation)
+
+Types of outcome
+\begin{itemize}
+\item Knowledg based:  knowledge and understanding
+\item Application based (practical skills). 
+\item Skills (interllectual and transferable skills). 
+\end{itemize}
+
+\subsection{Level}
+Making sure that the languge is consistent with the requirements of the level of study. Use of Bloom's taxonomy of Educational Objectives. Lower levels are usually considered 4 or 5, higher levels are 6 ot 7.  
+
+\begin{center}
+\begin{tabular}{l | p{3cm}|p{3cm}| p{3cm}}
+Level & What does it mean & What averbs are useful & Examples\\
+\hline
+Knowledge & What are students expected to know & Know, define, list, recall name, show, present.   & List of principals, Identify key features, Describe\\
+Comprehension & What do we expect students to be able to interpret & Discuss, review, explain, locate or illustrate & Explain how, Review...\\
+Application & Can students use a theory or information in different situations? & Solve, examine, interpret, apply, use. & Use a to..., Apply appropriate statistical tests\\
+Anlysis & Can students identify and explain relationships?  Can they break downledge into constituent parts? & Differentite, investigate, apprise, criticise, anlayse & Calculate..., Compare two processes\\
+Synthesis & Can students take parts of what they have learnt and put them together in differnet ways? & Assemble, organise, compose, construct, design...& Designe programme, Manage a budget for...\\
+Evaluation & Can students make judgements about knowledge? & Judge, select, assess, & Evaluate.., Assess.., \\
+\hline
+
+\end{tabular}
+\end{center}
+
+\end{document}

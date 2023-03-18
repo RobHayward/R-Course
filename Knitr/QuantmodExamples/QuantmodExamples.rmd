@@ -5,17 +5,25 @@ output:
 ---
 Quantmod examples
 ========================================================
-There are a large number of packages that have been produced by other people.  These packages hold additional functions that allow you to easily accomplish a range of tasks.  You must ``install`` the package to your machine.  This will save all the functions in a directory.  You must then ``require`` the package to make the functions available for a particular session. 
+There are a large number of packages that have been produced by other people.  These packages hold additional functions that allow you to easily accomplish a range of tasks.  You must ``install`` the package to your machine.  You use the function ``install.packages`` to do that.  This will save all the functions in a directory.  You must then ``require`` the package to make the functions available for a particular session. 
 
 We will look at the ``quantmod`` package. You can read all about the package on ``Cran``.  
+
+The first step is to automatically download data from Yahoo finance using the function ``getSymbols``.  This will send a request to the Yahoo web site and bring back the data.  If it does not get a response within a specific time frame, an error is displayed.  In that case, try again. 
+
+Once the data is downloaded, take a look at the data using the ``head`` and ``tail`` functions. 
 
 ```{r, message=FALSE, warning=FALSE,cache=TRUE}
 #install.packages('quantmod')
 require(quantmod)
 getSymbols("BAC")
-plot(Cl(BAC), col = 'black')
 head(BAC)
 tail(BAC)
+```
+	
+You can take a look at the other functions in the ``quantmod`` package by running ``?quantmod`` at the consol or pressing F1 when the cursor is over the word ``quantmod`` in RStudio. 
+
+```{r, message=FALSE, warnings=FALSE,cache=TRUE}
 head(Ad(BAC))
 ?quantmod
 ?OHLC
@@ -23,8 +31,9 @@ head(Ad(BAC))
 There are a number of built in plotting functions. 
 ```{r, fig.hight=4, warning=FALSE, message=FALSE, cache=TRUE}
 require(quantmod)
+plot(Cl(BAC), col = 'black')
 barChart(BAC)
-addTA(EMA(Cl(BAC)),on=1,col=6)
+
 ```
 
 **Practice**
@@ -34,27 +43,17 @@ addTA(EMA(Cl(BAC)),on=1,col=6)
 * Create a plot of the data
 
 
-  The getSymbols function can draw data from a number of different sources. Use the ``src`` argument.  
-
-Get Yahoo stock data from Google and Google stock data from Yahoo. 
-
-```{r, warning=FALSE, message=FALSE, cache=TRUE}
-require(quantmod)
-getSymbols("YHOO",src="google") # from google finance
-head(YHOO)
-getSymbols("GOOG",src="yahoo") # from yahoo finance
-head(GOOG)
-```
 
 ###Technical trading
 The ``ttr`` package is installed and loaded as part of ``quantmod``
 
-```{r, message=FALSE, warning=FALSE}
+```{r, cache=TRUE, message=FALSE, warning=FALSE}
 require(TTR)
 require(quantmod)
-barChart(YHOO)
+getSymbols("GOOG")
+barChart(GOOG)
 candleChart(GOOG,multi.col=TRUE,theme='white', subset = 'last 4 months')
-chartSeries(YHOO)
+chartSeries(GOOG)
 addMACD()
 addBBands()
 ```
@@ -71,11 +70,10 @@ One of the sources is the Fred database.  Here we get the data and chart it in d
 ```{r, cache=TRUE, message=FALSE, warning=FALSE}
 getSymbols('CPIAUCNS',src='FRED')
 plot(CPIAUCNS)
-plot(diff(log(CPIAUCNS)))
 plot(diff(log(CPIAUCNS), lag=12), main="CPI Inflation")
 ```
 
-```{r, cache=TRUE}
+```{r, cache=TRUE, message=FALSE, warning=FALSE}
 getSymbols('DEXJPUS',src="FRED") # FX rates from FRED
   plot(DEXJPUS, col = 'black', main = "USD-JPY")
 ```

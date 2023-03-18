@@ -5,3 +5,6 @@
 *Examples_cache/
 *Examples_files/
 *rsconnect/
+*concordance.tex
+*.log
+*.synctex.gz
