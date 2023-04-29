@@ -5,35 +5,35 @@ R is an open-source statistical programming language.  It is available from the 
 Competitors
 ----------------------------------------------------------
 R is one of the main programmable statistical languages.  Others include:
-* Stata:  Used in academic econometrics. This is not open source.
-* Matlab:  Used extensively in academic finance.  It is not open-source.  There is an open-source clone called *Octave*.  It can be downloaded [here.](https://www.gnu.org/software/octave/)
-* Python: Computer Language for statistical programming.  
-* Julia:  New language that is faster than R
-* C++:  Programming language.  Underneath R is C++ in some cases. 
+- Stata:  Used in academic econometrics. This is not open source.
+- Matlab:  Used extensively in academic finance.  It is not open-source.  There is an open-source clone called *Octave*.  It can be downloaded [here.](https://www.gnu.org/software/octave/)
+- Python: Computer Language for statistical programming.  
+- Julia:  New language that is faster than R
+- C++:  Programming language.  Underneath R is C++ in some cases. 
 
 Advantages of using R
 ------------------------------------------------------------
 The main advantages of using an open-source statistical programming language like R are:
-* It can be used by anyone for no cost.  Your model will not depend on the next institution having the same software licence
-* You can read and adjust functions that have been created by other people
-* There is a large community of people to help you
-* Your model will not depend on the next institution having the same software licence (do firms use Eviews?)
-* Programming language will encourage *reproducible research*
+- It can be used by anyone for no cost.  Your model will not depend on the next institution having the same software licence
+- You can read and adjust functions that have been created by other people
+- There is a large community of people to help you
+- Your model will not depend on the next institution having the same software licence (do firms use Eviews?)
+- Programming language will encourage *reproducible research*
 
 Reproducible Research
 --------------------------------------------------------------
 Reproducible Research is good practice and it means that results can be easily replicated.  This means
-* Mistakes can be more swiftly identified
-* Changes to data or research methods are easier to make
-* Replication and clarity are increasingly important for compliance in financial institutions
+- Mistakes can be more swiftly identified
+- Changes to data or research methods are easier to make
+- Replication and clarity are increasingly important for compliance in financial institutions
 
 Additional Information
 ---------------------------------------------------------
 Some additional information on R, R-Studio and Reproducible Research 
-* [European repository on spreadsheet horror stories](https://eusprig.org/research-info/horror-stories/)
-* [LSE commentary on reproducible research with a section on Reinhart and Rogoff](http://blogs.lse.ac.uk/impactofsocialsciences/2013/10/23/open-data-in-economics-the-basis-of-reproducible-research/)
-* [Quick R](https://www.statmethods.net)
-* [R Course on DataCamp](https://www.datacamp.com/courses/free-introduction-to-r)
+- [European repository on spreadsheet horror stories](https://eusprig.org/research-info/horror-stories/)
+- [LSE commentary on reproducible research with a section on Reinhart and Rogoff](http://blogs.lse.ac.uk/impactofsocialsciences/2013/10/23/open-data-in-economics-the-basis-of-reproducible-research/)
+- [Quick R](https://www.statmethods.net)
+- [R Course on DataCamp](https://www.datacamp.com/courses/free-introduction-to-r)
 
 Sessions
 ---------------

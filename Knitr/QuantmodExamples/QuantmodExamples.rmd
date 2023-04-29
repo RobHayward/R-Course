@@ -1,13 +1,25 @@
 ---
+title: "Quantmod Examples"
 output: 
   html_document: 
-    theme: united
+    theme: cerulean
 ---
-Quantmod examples
-========================================================
-There are a large number of packages that have been produced by other people.  These packages hold additional functions that allow you to easily accomplish a range of tasks.  You must ``install`` the package to your machine.  You use the function ``install.packages`` to do that.  This will save all the functions in a directory.  You must then ``require`` the package to make the functions available for a particular session. 
+# Introduction
+There are a large number of packages that have been produced by other people.  These packages hold additional functions that allow you to easily accomplish a range of tasks.  There are two steps that you need to complete to use these functions: 
+
+* You must ``install`` the package to your machine.  You use the function ``install.packages`` to do that.  This will save all the functions in a directory.  You only need to do this once. 
+* You must then ``require`` the package to make the functions available for a particular session.  This must be done for each session that you want to use the functions. 
 
 We will look at the ``quantmod`` package. You can read all about the package on ``Cran``.  
+
+[quantmod package details on Cran](https://cran.r-project.org/web/packages/quantmod/index.html)
+
+### Practice
+
+* Download the ``quantmod`` package.  
+* Take a look at some of the other packages that are available. You can find an overview here:  [R Packages](https://cran.r-project.org/web/packages/)
+
+## Read data into R
 
 The first step is to automatically download data from Yahoo finance using the function ``getSymbols``.  This will send a request to the Yahoo web site and bring back the data.  If it does not get a response within a specific time frame, an error is displayed.  In that case, try again. 
 
@@ -21,56 +33,70 @@ head(BAC)
 tail(BAC)
 ```
 	
-You can take a look at the other functions in the ``quantmod`` package by running ``?quantmod`` at the consol or pressing F1 when the cursor is over the word ``quantmod`` in RStudio. 
+### Practice
+
+You can take a look at the other functions in the ``quantmod`` package by running ``?quantmod`` at the console or pressing F1 when the cursor is over the word ``quantmod`` in RStudio. 
 
 ```{r, message=FALSE, warnings=FALSE,cache=TRUE}
 head(Ad(BAC))
 ?quantmod
 ?OHLC
 ```
-There are a number of built in plotting functions. 
+
+## Plot
+
+There are a number of built in plotting functions. You can compare ``plot`` and ``barChart``.   
+
 ```{r, fig.hight=4, warning=FALSE, message=FALSE, cache=TRUE}
 require(quantmod)
 plot(Cl(BAC), col = 'black')
 barChart(BAC)
-
 ```
 
-**Practice**
+### Practice
 
 * Automatically download the data for the Ford Motor Company from Yahoo
 * Check that the data is okay and find out the start and end dates
 * Create a plot of the data
 
+## Technical analysis 
 
+Technical analysis is a way of trying to understand firm performance by looking at charts.    The ``ttr`` package is installed and loaded as part of ``quantmod``.  Look at some of the functions that come with this package. Use ``?ttr``.
 
-###Technical trading
-The ``ttr`` package is installed and loaded as part of ``quantmod``
+Here is a candle chart of Google for the last four months.  You can see some of the options that are available for the ``candleChart`` function. Here we add MACD and Bollinger Bands.  
 
 ```{r, cache=TRUE, message=FALSE, warning=FALSE}
-require(TTR)
-require(quantmod)
 getSymbols("GOOG")
-barChart(GOOG)
 candleChart(GOOG,multi.col=TRUE,theme='white', subset = 'last 4 months')
-chartSeries(GOOG)
 addMACD()
 addBBands()
 ```
 
-**Practice**
+You can take a look at the way that [MACD](https://www.investopedia.com/terms/m/macd.asp) and [Bollinger Bands](https://cran.r-project.org/web/packages/) work
+
+### Practice
 
 * Check the functions that are available in ``TTR`` package
-* Create a 5-day moving average of YHOO and call it ``YHOO5DMA``` 
-* Plot the Yahoo 5-day moving average. 
+* Create a 5-day moving average of Google and call it ``GOOG5DMA``` 
+* Plot the Google 5-day moving average. 
+* Add the Google Closing price and identify the current position given a strategy that buys on a positive cross-over and sells on a negative cross-over. 
+
+```{r}
+require(quantmod)
+getSymbols('GOOG')
+plot(Cl(GOOG), col = 'black')
+lines(SMA(GOOG$GOOG.Close, 100), col = 'red')
+```
 
 
-###The Fred database
-One of the sources is the Fred database.  Here we get the data and chart it in different ways. 
+## The Fred database
+One of the sources is that ``quantmod`` package is the St. Louis Fred database.  Here we get the data and chart it in different ways.  We search for data on the database, find the code and add that to the code. 
+
+[St. Louis Fed database](https://fred.stlouisfed.org/)
+
 ```{r, cache=TRUE, message=FALSE, warning=FALSE}
-getSymbols('CPIAUCNS',src='FRED')
-plot(CPIAUCNS)
-plot(diff(log(CPIAUCNS), lag=12), main="CPI Inflation")
+getSymbols('UNRATE',src='FRED')
+plot(UNRATE, main = "Unemployment Rate")
 ```
 
 ```{r, cache=TRUE, message=FALSE, warning=FALSE}
@@ -78,8 +104,8 @@ getSymbols('DEXJPUS',src="FRED") # FX rates from FRED
   plot(DEXJPUS, col = 'black', main = "USD-JPY")
 ```
 
-**Practice**
+### Practice
 
 * Go to the St. Louis Fed database
-* Find the code for US unemployment data
+* Find the code for US GDP data
 * Plot the data and beautify the chart

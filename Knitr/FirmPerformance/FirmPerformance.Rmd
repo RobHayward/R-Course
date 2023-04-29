@@ -1,0 +1,144 @@
+---
+title: "Firm Performance"
+output: 
+  html_document: 
+    theme: cerulean
+date: "April 2023"
+---
+
+## Introduction
+
+The easiest way to prepare data for R is to hold the data in a csv file with the dates in the first column and variables in columns.   It is also possible to store data in excel but this requires you to download an additional package of functions.  We will take a look at that later in the week.  
+
+If you store data in a set format it is easier to process. It is best practice to do all the data processing in R so that it can be reproduced easily when the data is updated and so that all the steps are clear. 
+
+### Practice
+
+* Go to Yahoo Finance and download monthly data for Apple from January 2000 to December 2022. 
+
+## Managing projects and data
+
+If you have not yet found a way to manage your information you should find a solution as soon as possible.  RStudio can help you with  `Projects`.   You can start at new project by selecting `File` and `New Project`.  You can create a new folder or directory for this or use an existing one.  You might then decide to divide this project into set folders or directories that contain things like `Data`, `docs`, `R` and `Knitr` files.  It is good practice to have a `README` file to explain the layout and details of the directory. 
+
+For example, I have the following set up for my RStudio files. 
+
+
+![](../../../Pictures/Rstuddirectorylayout.png)
+
+It is also possible to `set the working directory` to the current directory by going to ``session`` and ``set working directory``.   If you do this, it will make your life easier as this working directory is the first place that R will look for data. 
+### Practice 
+
+
+Create a project in an appropriate folder or directory
+
+## Reading data into R
+
+Assuming that you have saved the data into a file called `bac.csv` in your Data directory, the function to read data into R is `read.csv`.  If it works correctly, you should see the new object called `da` (or whatever you want to call it) in the `Environment`.    You can take a look at this object using the functions `head` and `str`.  The first will show the first 6 lines and the second will show the structure. 
+
+```{r}
+da <- read.csv('../../Data/bac.csv')
+head(da)
+str(da)
+```
+
+### Practice 
+
+* Import your Apple data into R. 
+* Check the data
+
+## Changing the class of objects
+
+You can see from these functions that we have a data frame with monthly data for Bank of America and the S&P 500 index with dates in the first column.  The price data are numerics (num) while the date is a character (chr).  We would like to turn the dates into a date object so that R knows that they run in sequence from yesterday through today.  We can doi this using the `as.Date` function.  We need to tell the function the structure of the data.  You can find out more about this here: 
+
+[Mollie's Research Blog: Importing dates](https://www.r-bloggers.com/2013/08/date-formats-in-r/)
+
+```{r}
+da$Date <- as.Date(da$Date, format = "%d/%m/%Y")
+str(da)
+```
+
+We now have dates and not just words. 
+
+### Practice
+
+* Turn the Date column for your Apple data into a date object rather than a character
+* Check that first column is a date 
+
+## Assessing performance
+
+To assess the performance of Bank of America and the S&P 500 index we will use the sample (from the past) as a way to understand the population (including the future).   If the sample is representative of the future, the mean will give us the most likely outcome.  This is the **expected return**. 
+
+First we need to calculate the returns. This is a little more tricky than excel, but once we have written the code once, we can use it over and over again.  Next week we will write an ``return`` function. 
+
+```{R}
+da$BACR <- c(da$BAC[1:length(da$BAC) - 1] / da$BAC[2:length(da$BAC)] - 1, NA)
+da$SPYR <- c(da$SPY[1:length(da$SPY) - 1] / da$SPY[2:length(da$SPY)] - 1, NA)
+head(da)
+tail(da)
+```
+
+### Practice
+
+* Calculate Apple returns
+* Make sure you are clear what is being done here with the square brackets.   Why do we need NA? 
+
+## Mean, standard deviation and other metrics
+
+Now calculate the mean, standard deviation, max and min. 
+
+```{r}
+mean(da$BACR, na.rm = TRUE)
+mean(da$SPYR, na.rm = TRUE)
+sd(da$BACR, na.rm = TRUE)
+sd(da$SPYR, na.rm = TRUE)
+```
+
+### Practice
+
+* Calculate mean and standard deviation for Apple returns
+* Find how to calculate the skew and kurtosis
+* Calculate skew and kurtosis for Bank of America, the S&P 500 and Apple. 
+
+## Plotting returns and performance
+
+We would like to look at the distribution of the returns.  We do do this by constructing a histogram using the ``hist`` function. 
+
+```{r, warning=FALSE}
+hist(da$BACR, prob = TRUE, main = "Histogram of BAC Returns", 
+     xlab = "Returns", ylab = 'Probability', col = 'cornflowerblue', 
+     breaks = seq(-0.6, 0.8, by = 0.05))
+```
+
+
+Now calculate the price over time. 
+
+```{r, warning=FALSE}
+plot(da$Date, da$BAC, type = 'l', main = "Bank of America", 
+     xlab = 'Date', ylab = "Price")
+```
+
+
+## Plotting both stock and market
+
+We would like to plot both on the same graph.  Remember the re-basing that we did with the GDP data?  We can create new series that are re-based to be 100 at the beginning.  We do this by dividing by the first price and then multiplying by 100.  Apply this formula to all the rows of data.  
+
+```{r}
+da$BACRebased <- da$BAC/da$BAC[length(da$BAC)] * 100
+da$SPYRebased <- da$SPY/da$SPY[length(da$SPY)] * 100
+head(da)
+tail(da)
+```
+
+Now plot
+```{r}
+plot(da$Date, da$BACRebased, type = 'l', xlab = "Date", 
+     ylab = "Price", main = "BAC and S&P 500", lty = 1)
+lines(da$Date, da$SPYRebased, col = 'blue', lty = 2)
+legend('topleft', inset = 0.05, legend = c("BAC", "SPY"), 
+       col = c('black', 'blue'), lty = c(1, 2), cex = 0.8)
+```
+
+### Practice
+
+* Create an alternative base point for the series
+* Plot data with the new base
