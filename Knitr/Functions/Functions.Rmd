@@ -1,9 +1,14 @@
-Writing functions
---------------------------------
-The advantage of programming rather than using menus is that it allows you to create your own functions for things that you want to do.  This is carried out using function and the list of inputs.  
+---
+title: "Writing functions"
+output: html_document
+date: "May 2023"
+---
+## Introduction
 
-Basic function
----------------------------------
+One advantage of writing programmes is that you can write your own functions to do things that you are likely to want to repeat.  Once you have successfully completed a difficult piece of code, turn it into a function so that you do not have to write it again. 
+
+Like everything in R, a function is an object with particular characteristics.  For example, if we wanted to write a function that would find the square of any number that we input, 
+
 ```{r} 
 square <- function(x) {
   x^2
@@ -12,7 +17,42 @@ square(2)
 square(3)
 square(4)
 ```
-Any calculations can be produced in the same format.  For example, to automatically calculate the future values using the equation $FV = PV(1 + R)^n$
+
+Note the structure: 
+
+```
+function name <- function(argument 1, argument 2){
+
+function details (R code)
+}
+```
+
+
+We could extend this to calculate a range of exponentials. 
+
+
+
+```{r}
+exponential <- function(x, y){
+  x^y
+}
+exponential(2, 3)
+exponential(5,2)
+```
+
+
+
+## Financial values
+
+We can write a function that will allow us to value a security. 
+
+Starting with \£100 and an interest rate of 5\%, we would expect to have 
+
+$$FV = PV \times (1 + R)^n$$
+
+where FV is the future value, PV is the present value, R is the interest rate or rate of return and n is the number of years.  This would be: 
+
+
 ```{r}
 FV <- function(PV = 100, R, n = 1) {
   FV = PV*(1 + R)^n
@@ -24,50 +64,71 @@ a
 a <- FV(R = 0.1, n = 2)
 a
 ```
-See if you can do the same for the present value $PV = \frac{FV}{(1 +R)^n}$
 
-There are some examples and further information from the UCLA [here](http://www.ats.ucla.edu/stat/r/library/intro_function.htm).
+The standard valuation of a financial asset is the present discounted value.  The formula would be: 
 
-Control Structures in R
---------------------------------------
-The commands for, if and while can be used to create loops.  Vectors are generally preferred to loops but...
+$$ PV = \frac{FV}{(1 + R)^n}$$
 
-Common structures
-* if, else:  testing a condition
-* for: execute a loop a fixed number of times
-* while: repeate a loop *while* condiction is true
+where PV is the present value, FV is the future value, R is the rate of return or the discount rate and n is the number of years into the future. 
 
-```{r}
-x <- 10
-if(x > 3) {
-y <- 10
-} else {
-y <- 0
-}
-y
-```
-This can be used for selecting particular events. For example, if you have a dataframe with US, German and UK data it would be possible to say country <- "Germany" and if(country == "Germany", plot(da[,3])) with column three containing the German data etc.
+
+
+### Practice 
+
+1. See if you can write the function for the present value.  This is just the present value re-arranged.  
+
+2. Create a vector that has a range of discount rates (from 5\% to 10\%) and calculate the change in the present value for each of these rates. 
+
+
+## Descriptive statistics function
+
+The following function will calculate descriptive statistics, store them in a data frame and present the statistics in a clear format. 
 
 ```{r}
-for(i in 1:10){
-  print(i)
+mystats <- function(x){
+  x <- x[!is.na(x)]
+  n <- length(x)
+  m <- mean(x)
+  s <- sd(x)
+  med <- median(x)
+  skew <- sum((x-m)^3/s^3)/n
+  kurt <- sum((x-m)^4/s^4)/n - 3
+  max <- max(x)
+  min <- min(x)
+  mydescriptive <- round(data.frame(
+    "Number" = n,
+    "Mean" = m,
+    "Median" = med,
+    "Std dev" = s,
+    "Skew" = skew,
+    "Kurtosis" = kurt,
+    "Maximum" = max,
+    "Minimum" = min), 2)
+  return(mydescriptive)
 }
+mydata <- rnorm(100)
+mystats(mydata)
 ```
-This could be used for running through a list of tests that you want to make.  For example. 
+
+
+## Returns 
+
+Remember our code to calculate returns.  We could turn this into a function. 
 
 ```{r}
-x <- c(2, 3, 4, 5, 8, 10, 3, 4)
-for(i in c(mean, sd)){
-  a <- "i"(x)
-print(a)
+myreturns <- function(x){
+  returns <- c(x[1:length(x)-1]/x[2:length(x)] -1, NA)
+  return(returns)
 }
+myseries <- 10:1
+round(myreturns(myseries), 2)
 ```
-And while
-```{r}
-count <- 0
-while(count <10){
-  print(count)
-  count <- count +1
-}
-```
-Obviously, you have to make sure that the while will come to an end, otherwise you will be in an infinite loop. 
+
+### Practice
+
+See if you can change the function to allow the function to work on data that runs from old to new.   
+
+## Additional help
+
+There are some examples and further information about functions [here](https://www.dataquest.io/blog/write-functions-in-r/)
+

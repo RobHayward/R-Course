@@ -1,0 +1,122 @@
+---
+title: "The Phillips Curve"
+output: 
+  html_document: 
+    theme: cerulean
+date: "May 2023"
+---
+
+# Introduction
+
+This is an exercise to analyse the performance of the Phillips Curve.  The task is to download data from the IMF World Economic Outlook Database.  You can find that here: 
+
+[World Economic Outlook Database](https://www.imf.org/en/Publications/SPROLLs/world-economic-outlook-databases)
+
+You must download the data and save it was a csv file.  This is a difficult file to manage because it is actually a ``tab-separated-variable`` file and because the data is presented in rows rather than the usual columns.   Managing and sorting out data is a key part of this exercise.  It is not unusual to find that this takes more time than the analysis. 
+
+## Read the data into R
+
+If you have set up a ``Project`` and have the data file in the same directory or folder as your R code, you will not need ``../../`` before the name in your data file.  You may not need ``fileEncoding = 'UTF-16LE'`` or ``blank.lines.skip = TRUE``.  Try it with and without.  If in doubt, please post a question to the discussion board. 
+
+
+```{r}
+da <- read.delim('../../Data/WEO_Data.csv', fileEncoding = 'UTF-16LE', 
+                 blank.lines.skip = TRUE)
+str(da)
+head(da)
+```
+
+**THIS IS A MESS**
+
+## Create a data frame
+
+We create a dataframe from this mess and check the results.   Make sure that you understand all the steps. 
+
+```{r}
+head(t(da[1:2,7:length(da)-1]))
+tail(t(da[1:2,7:length(da)-1]))
+str(t(da[1:2,7:length(da)-1]))
+Unemployment = t(unname(da[2, c(7:length(da)-1)]))
+head(Unemployment)
+Inflation = t(unname(da[1, c(7:length(da)-1)]))
+dat <- data.frame("Unemployment" = Unemployment, 
+                  "Inflation" = Inflation, row.names = 1980:2022)                  
+colnames(dat) <- c("Unemployment", "Inflation")
+head(dat)
+tail(dat)
+str(dat)
+```
+
+## View the data
+
+Plot the time series 
+```{r}
+plot(1980:2022, dat$Unemployment, type = 'l', ylim = c(0, 15), 
+     main = "US Unemployment and inflation", xlab = "Year", 
+     ylab = "Percentage")
+lines(1980:2022, dat$Inflation, col = 'red', lty = 2)
+legend('topright', inset = 0.08, legend = c("Unemployment", 
+              "Inflation"),  col = c('black', 'red'), lty = c(1, 2))
+```
+
+There seems to be a mirror, as we would expect for the Phillips curve.  However, that is less apparent when we use a scattergram. 
+
+```{r}
+plot(dat$Unemployment, dat$Inflation, main = "US unemployment and 
+     inflation", xlab = "Unemployment", ylab = "Inflation")
+```
+
+## Linear regression
+
+The ``lm()`` is the function for a **linear regression**.  We can create a regression object with the regression results.
+
+```{r}
+eq1 <- lm(dat$Inflation ~ dat$Unemployment)
+summary(eq1)
+```
+
+You can see the results using the ``summary()`` function.  You can see from this that the R-squared is very low and the estimate of the slope is not statistically significant. However, if you look at the original time series chart you can see that the starting and ending points are the end of the high inflation 1970s and the beginning of the recent inflation phase.  We could look at the results when these periods are removed. 
+
+```{r}
+dat2 <- dat[9:length(dat$Unemployment) -3, ]
+head(dat2)
+tail(dat2)
+```
+
+Now another regression
+
+```{r}
+eq2 <- lm(dat2$Inflation ~ dat2$Unemployment)
+summary(eq2)
+```
+
+It is possible to extract elements of the regression results.  To see the options use the ``names()`` function.  
+
+```{r}
+names(eq1)
+```
+
+You can see that one of these is ``residuals``.   We can plot the residuals to see if they are random as should be the case if nothing important is missing from the model. 
+
+```{r}
+plot(eq2$residuals)
+```
+
+What is notable here is the downward trend to the residuals.  This can be estimated using a time trend (like we did with the GDP data in excel). 
+
+```{r}
+eq3 <- lm(eq2$residuals ~ I(1:35))
+summary(eq3)
+```
+
+We can add this to the residual plot. 
+
+```{r}
+plot(1985:2019, eq2$residuals, main = "Residuals and trend", 
+     xlab = "Year", ylab = "Residuals")
+lines(1985:2019, eq3$fitted.values, col = 'red')
+legend('topright', inset = 0.08, legend = 
+         "Downward trend on inflation", lty = 1, col = 'red') 
+```
+
+There is something additional putting downward pressure on inflation (other than unemployment).  We might add other variables to the model to try to account for these.  For example, some suggest that the balance between labour and capital has been tipped more decisively on the side of capital and this makes is much harder for workers to take advantage of tight labour markets.  This might be measured by the level of union membership or the level of industry concentration. 
